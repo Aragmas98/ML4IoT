@@ -5,7 +5,7 @@ import time as time
 import sys
 
 dht_device = adafruit_dht.DHT11(D4)
-file_path = './outputs/l11.txt'
+file_path = './outputs/l1_1_measurements.txt'
 
 original_stdout = sys.stdout # Save a reference to the original standard output
 with open(file_path, 'w') as f:

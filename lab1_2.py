@@ -10,7 +10,7 @@ samp_rate = 44100 #44.1kHz sampling rate
 chunk = 4096 #2^12 samples for buffer
 record_secs = 3 #seconds to record
 dev_index = 2 # index of mic_device according (p.get_device_info_by_index(i).get('name'))
-wav_output_filename = './outputs/l1_2.wav' #name of .wav file
+wav_output_filename = './outputs/l1_2_audio.wav' #name of .wav file
 
 # ------------------------------------------
 ERROR_HANDLER_FUNC = CFUNCTYPE(None, c_char_p, c_int, c_char_p, c_int, c_char_p)

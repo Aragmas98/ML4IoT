@@ -10,8 +10,8 @@ frame_length = 16*l # 16 [samples/ms] * 40 [ms]
 frame_step = 16*s
 
 filename1 = './outputs/l2_2_audio16.wav'
-filename2 = './outputs/tensor.txt'
-filename3 = './outputs/tensor.png'
+filename2 = './outputs/l2_2_tensor.txt'
+filename3 = './outputs/l2_2_tensor.png'
 
 #Read the audio signal
 audio = tf.io.read_file(filename1)
