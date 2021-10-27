@@ -5,10 +5,10 @@ import time as time
 import sys
 
 dht_device = adafruit_dht.DHT11(D4)
-
+file_path = './outputs/l11.txt'
 
 original_stdout = sys.stdout # Save a reference to the original standard output
-with open('filename.txt', 'w') as f:
+with open(file_path, 'w') as f:
 
     while True:
         temperature = dht_device.temperature
