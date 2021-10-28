@@ -40,8 +40,7 @@ tf.io.write_file(filename2, tensor_bstr)
 
 #Measure the size of the output file
 print('original: ', os.path.getsize(filename1),' bytes')
-print('spectogram: ', os.path.getsize(filename2),' bytes')
-
+print('spectrogram: ', os.path.getsize(filename2),' bytes')
 
 #Transpose the spectrogram to represent time on x-axis
 image = tf.transpose(spectrogram)
@@ -57,6 +56,7 @@ min_ = tf.reduce_min(image)
 max_ = tf.reduce_max(image)
 image = (image - min_) / (max_ - min_)
 image = image * 255
+
 
 #Cast the tensor to uint8
 image = tf.cast(image, tf.uint8)
