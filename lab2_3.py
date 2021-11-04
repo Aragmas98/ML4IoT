@@ -31,14 +31,14 @@ mel_spectrogram = tf.tensordot(
         linear_to_mel_weight_matrix,
         1)
 
-mel_spectrogram.set_shape(spectrogram.shape[:-1].concatenate( 
-        linear_to_mel_weight_matrix.shape[-1:]))
+# mel_spectrogram.set_shape(spectrogram.shape[:-1].concatenate( 
+#         linear_to_mel_weight_matrix.shape[-1:]))
 
 log_mel_spectrogram = tf.math.log(mel_spectrogram + 1e-6)
 
 #Compute the MFCCs
 mfccs = tf.signal.mfccs_from_log_mel_spectrograms(
-        log_mel_spectrogram)#[:,:10]
+        log_mel_spectrogram)[...,:10]
 
 #Convert the tensor in a byte string
 tensor_bstr = tf.io.serialize_tensor(mfccs)
@@ -57,7 +57,7 @@ image = tf.expand_dims(image, -1)
 
 
 #Take the logarithm of the spectrogram
-# image = tf.math.log(image + 1.e-6) # >> removed because it generates nan values
+#image = tf.math.log(image + 1.e-6) # >> removed because it generates nan values
 
 
 #Apply min/max normalization
