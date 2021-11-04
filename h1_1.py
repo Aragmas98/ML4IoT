@@ -1,5 +1,6 @@
 import argparse
 import tensorflow as tf
+import time, datetime
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, help='input file name', required=True)
@@ -21,6 +22,8 @@ def _int64_feature(value):
   """Returns an int64_list from a bool / enum / int / uint."""
   return tf.train.Feature(int64_list=tf.train.Int64List(value=[value]))
 
+MIN_TEMP = 0
+MAX_TEMP = 50
 
 with tf.io.TFRecordWriter(args.output) as writer:
     with open(args.input, 'r') as f:
@@ -29,10 +32,19 @@ with tf.io.TFRecordWriter(args.output) as writer:
 
         while data_line != None and data_line != "":
             data_line = data_line.split(',')
+            
+            strdate = data_line[0] + ' ' + data_line[1]
+            datetimeobj=datetime.datetime.strptime(strdate,"%d/%m/%Y %H:%M:%S")
+            timeobj = time.mktime(datetimeobj.timetuple())
+
+            if args.normalize:
+                temp = float(data_line[2]) / (MAX_TEMP - MIN_TEMP)
+            else:
+                temp = float(data_line[2])
+            
             mapping = { 
-                    'date': _bytes_feature(str.encode((data_line[0]))),
-                    'time': _bytes_feature(str.encode((data_line[1]))), 
-                    'temperature': _float_feature(float(data_line[2])), 
+                    'datetime': _float_feature(float(timeobj)), 
+                    'temperature': _float_feature(temp), 
                     'humidity': _float_feature(float(data_line[3]))
                 }
             example = tf.train.Example(features=tf.train.Features(feature=mapping))
