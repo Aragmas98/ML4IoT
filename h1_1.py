@@ -1,6 +1,7 @@
 import argparse
 import tensorflow as tf
 import time, datetime
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--input', type=str, help='input file name', required=True)
@@ -25,28 +26,40 @@ def _int64_feature(value):
 MIN_TEMP = 0
 MAX_TEMP = 50
 
-with tf.io.TFRecordWriter(args.output) as writer:
-    with open(args.input, 'r') as f:
+MIN_HUM = 20
+MAX_HUM = 90
 
-        data_line = f.readline()
+def convertFile():
+    with tf.io.TFRecordWriter(args.output) as writer:
+        with open(args.input, 'r') as f:
 
-        while data_line != None and data_line != "":
-            data_line = data_line.split(',')
-            
-            strdate = data_line[0] + ' ' + data_line[1]
-            datetimeobj=datetime.datetime.strptime(strdate,"%d/%m/%Y %H:%M:%S")
-            timeobj = time.mktime(datetimeobj.timetuple())
-
-            if args.normalize:
-                temp = float(data_line[2]) / (MAX_TEMP - MIN_TEMP)
-            else:
-                temp = float(data_line[2])
-            
-            mapping = { 
-                    'datetime': _float_feature(float(timeobj)), 
-                    'temperature': _float_feature(temp), 
-                    'humidity': _float_feature(float(data_line[3]))
-                }
-            example = tf.train.Example(features=tf.train.Features(feature=mapping))
-            writer.write(example.SerializeToString())
             data_line = f.readline()
+
+            while data_line != None and data_line != "":
+                data_line = data_line.split(',')
+
+                strdate = data_line[0] + ' ' + data_line[1]
+                datetimeobj=datetime.datetime.strptime(strdate,"%d/%m/%Y %H:%M:%S")
+                timeobj = time.mktime(datetimeobj.timetuple())
+
+                if args.normalize:
+                    temp = (float(data_line[2]) - MIN_TEMP)/ (MAX_TEMP - MIN_TEMP)
+                    hum = (float(data_line[3]) - MIN_HUM)/(MAX_HUM - MIN_HUM)
+                else:
+                    temp = float(data_line[2])
+                    hum = float(data_line[3])
+
+                mapping = { 
+                        'datetime': _float_feature(float(timeobj)), 
+                        'temperature': _float_feature(temp), 
+                        'humidity': _float_feature(hum)
+                    }
+                example = tf.train.Example(features=tf.train.Features(feature=mapping))
+                writer.write(example.SerializeToString())
+                data_line = f.readline()
+
+
+if __name__ == '__main__':
+    convertFile()
+    print(f'csv: {os.path.getsize(args.input)}B')
+    print(f'tfrecord: {os.path.getsize(args.output)}B')
