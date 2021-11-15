@@ -106,12 +106,15 @@ if __name__ == "__main__":
     coefs = 10 
 
     print('|--- MFCC_slow ...')
+    start_time = time.time()
     times_MFCC_slow = MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, coefs)
-    
+    end_time = time.time()
     tags = ['reading', 'sftf', 'mel', 'mfccs']
     print("|   |--- Average execution time: ", np.mean(times_MFCC_slow, axis=0)[0]*1000, ' ms')
-    print("|   |--- avg distribution:", tags)
-    print("|   |         |---", np.mean(times_MFCC_slow, axis=0)[1:]*1000, ' ms')
-    print("|   |         |---", np.mean(times_MFCC_slow, axis=0)[1:]/np.mean(times_MFCC_slow, axis=0)[0],' %')
-    print("|   |--- Total execution time: ", np.sum(times_MFCC_slow[:][0]), ' s')
+    print("|   |      |--- tags: ", tags)
+    print("|   |      |--- ms: ", np.mean(times_MFCC_slow, axis=0)[1:]*1000)
+    print("|   |      |--- %: ", np.mean(times_MFCC_slow, axis=0)[1:]/np.mean(times_MFCC_slow, axis=0)[0])
+    print("|   |--- Total execution time: ", (end_time-start_time)/60.0, ' min')
+    print("|   |      |--- Effective min: ",  np.sum(times_MFCC_slow, axis=0)[0]/60.0)
+    print("|   |      |--- Effective %: ", np.sum(times_MFCC_slow, axis=0)[0]/(end_time-start_time))
     print("|   |--- Executed files: ", len(times_MFCC_slow))
