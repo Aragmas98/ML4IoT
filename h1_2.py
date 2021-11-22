@@ -1,72 +1,36 @@
 import os
-import sys
-import zipfile
 import tensorflow as tf
 import time
 import numpy as np
-
 from subprocess import Popen
 
-from scipy import signal
-import wave
-from scipy.io import wavfile
-
-EARLY_STOP = False
-ITER_NUM = 1
-VERBOSE = False
-READING1 = 'tf' # 'tf' or 'wavfile'
-READING2 = 'tf' # 'tf' or 'wavfile'
 
 def MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, mel_coefs):
     Popen('sudo sh -c "echo performance >'
         '/sys/devices/system/cpu/cpufreq/policy0/scaling_governor"', 
         shell=True).wait()
 
-    time_results = []
+    time_results =[]
     mfccs_results = []
     
     for i, filename in enumerate(os.listdir(file_path)):
         if not os.path.isdir(filename):
+            start_time = time.time()
+
+            #Read the audio signal
+            audio = tf.io.read_file(f'{file_path}{filename}')
+
+            #Convert the signal in a TensorFlow
+            tf_audio, rate = tf.audio.decode_wav(audio)
+            tf_audio = tf.squeeze(tf_audio, 1) #shape: (16000,) 
             
-            time0 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
-            if READING1 == 'tf':
-                #Read the audio signal
-                audio = tf.io.read_file(f'{file_path}{filename}')
-                #Convert the signal in a TensorFlow
-                tf_audio, rate = tf.audio.decode_wav(audio)
-                tf_audio = tf.squeeze(tf_audio, 1) #shape: (16000,) 
-
-            else:
-                rate, audio = wavfile.read(f'{file_path}{filename}')
-                audio = audio / np.max(np.abs(audio))
-                tf_audio = tf.convert_to_tensor(audio, np.float32)
-
-            if VERBOSE: print(f'>>audio: {tf_audio.shape}')
-
-            time1 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
-            if READING1 == 'tf':
-                # Convert the waveform in a spectrogram applying the STFT
-                stft = tf.signal.stft(tf_audio, 
-                            frame_length=frame_length, 
-                            frame_step=frame_step,
-                            fft_length=frame_length)
-                spectrogram = tf.abs(stft) #shape: (49,321)
-            else:
-                _,_,stft = signal.stft(audio, 
-                            fs=sampling_rate, 
-                            nperseg=frame_length,
-                            noverlap=frame_step,
-                            nfft=frame_length
-                            )
-                spectrogram = np.abs(stft.T)[:-2,:]
-                spectrogram = tf.convert_to_tensor(spectrogram, np.float32)
-
-            if VERBOSE: print(f'>>spectrogram: {spectrogram.shape}')
-            
-            time2 = time.time()#<<<<<<<<<<<<<<<<<<<<<<<<
-
+            # Convert the waveform in a spectrogram applying the STFT
+            stft = tf.signal.stft(tf_audio, 
+                        frame_length=frame_length, 
+                        frame_step=frame_step,
+                        fft_length=frame_length)
+            spectrogram = tf.abs(stft) #shape: (49,321)
+           
             if i == 0:
                 #Compute the log-scaled Mel spectrogram
                 num_spectrogram_bins = spectrogram.shape[-1]
@@ -85,27 +49,13 @@ def MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, 
 
             log_mel_spectrogram = tf.math.log(mel_spectrogram + 1e-6) #shape: (49,40)
 
-            if VERBOSE: print(f'>>mel: {log_mel_spectrogram.shape}')
-
-            time3 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
             #Compute the MFCCs  #shape:(49,10)
             mfccs = tf.signal.mfccs_from_log_mel_spectrograms( 
                         log_mel_spectrogram)[...,:mel_coefs]
 
-            if VERBOSE: print(f'>>mfcc: {mfccs.shape}')
-
-            time4 = time.time()
-            
-            duration = time4 - time0
-            
-            time_list = [duration, (time1 - time0), (time2 - time1), (time3 - time2), (time4 - time3)]
-
-            time_results.append(time_list)
+            end_time = time.time()
+            time_results.append(end_time-start_time)
             mfccs_results.append(mfccs)
-
-            if i == ITER_NUM-1 and EARLY_STOP:
-                return time_results, mfccs_results
 
     return time_results, mfccs_results
 
@@ -120,52 +70,26 @@ def MFCC_fast(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, 
     for i, filename in enumerate(os.listdir(file_path)):
         if not os.path.isdir(filename):
 
-            time0 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
-            if READING2 == 'tf':
-                #Read the audio signal
-                audio = tf.io.read_file(f'{file_path}{filename}')
-                #Convert the signal in a TensorFlow
-                tf_audio, rate = tf.audio.decode_wav(audio)
-                if factor > 1:
-                    tf_audio = tf.reshape(tf_audio, [8000,2])[:,0]
-                else:
-                    tf_audio = tf.squeeze(tf_audio, 1) #shape: (16000,) 
-
+            start_time = time.time()
+            #Read the audio signal
+            audio = tf.io.read_file(f'{file_path}{filename}')
+            #Convert the signal in a TensorFlow
+            tf_audio, rate = tf.audio.decode_wav(audio)
+            if factor > 1:
+                tf_audio = tf.reshape(tf_audio, [int(sampling_rate/factor),factor])[:,0]
             else:
-                rate, audio = wavfile.read(f'{file_path}{filename}')
-                if factor > 1:
-                    audio = signal.resample_poly(audio, 1, factor)
-                audio = audio / np.max(np.abs(audio))
-                #tf_audio = tf.convert_to_tensor(audio, np.float32)
+                tf_audio = tf.squeeze(tf_audio, 1) #shape: (16000,) 
 
-            if VERBOSE: print(f'>>audio: {audio.shape}')
-
-            time1 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
-            if READING2 == 'tf':
-                # Convert the waveform in a spectrogram applying the STFT
-                stft = tf.signal.stft(tf_audio, 
-                            frame_length=int(frame_length/factor), 
-                            frame_step=int(frame_step/factor),
-                            fft_length=int(frame_length/factor)
-                            )   
-                
-                spectrogram = tf.abs(stft) 
-            else:
-                _,_,stft = signal.stft(audio, 
-                            fs=sampling_rate, 
-                            nperseg=int(frame_length/factor),
-                            noverlap=int(frame_step/factor),
-                            nfft=int(frame_length/factor)
-                            )
-                spectrogram = np.abs(stft.T)[:-2,:]
-                spectrogram = tf.convert_to_tensor(spectrogram, np.float32)
-
-            if VERBOSE: print(f'>>spectrogram: {spectrogram.shape}')#shape: (49,321)
+        
+            # Convert the waveform in a spectrogram applying the STFT
+            stft = tf.signal.stft(tf_audio, 
+                        frame_length=int(frame_length/factor), 
+                        frame_step=int(frame_step/factor),
+                        fft_length=int(frame_length/factor)
+                        )   
             
-            time2 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
-
+            spectrogram = tf.abs(stft) 
+            
             if i == 0:
                 #Compute the log-scaled Mel spectrogram
                 num_spectrogram_bins = spectrogram.shape[-1]
@@ -182,31 +106,16 @@ def MFCC_fast(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, 
                         linear_to_mel_weight_matrix,
                         1)
 
-            
             log_mel_spectrogram = tf.math.log(mel_spectrogram + 1e-6) 
-
-            if VERBOSE: print(f'>>mel: {log_mel_spectrogram.shape}')#shape: (49,40)
-
-            time3 = time.time() #<<<<<<<<<<<<<<<<<<<<<<<<
             
             #Compute the MFCCs  
             mfccs = tf.signal.mfccs_from_log_mel_spectrograms( 
                         log_mel_spectrogram)[:,:mel_coefs]
 
-            if VERBOSE: print(f'>>mfcc: {mfccs.shape}')#shape:(49,10)
+            end_time = time.time()
 
-            time4 = time.time()
-            
-            duration = time4 - time0
-            
-            time_list = [duration, (time1 - time0), (time2 - time1), (time3 - time2), (time4 - time3)]
-
-            time_results.append(time_list)
+            time_results.append(end_time-start_time)
             mfccs_results.append(mfccs)
-
-            if i == ITER_NUM-1 and EARLY_STOP:
-                return time_results, mfccs_results
-
 
     return time_results, mfccs_results
 
@@ -225,10 +134,7 @@ def getSNR(mfcc_listS, mfcc_listF):
 
 
 if __name__ == "__main__":
-    VERSION = 1.6
-    print(f'--- V.{VERSION} ---')
-
-
+    
     file_path = './inputs/H1_yes_no/' #path to unziped files
 
     L = 1000 #ms
@@ -240,50 +146,23 @@ if __name__ == "__main__":
     frame_length = rate*l # rate [samples/ms] * 16 [ms] 
     frame_step = rate*s # rate [samples/ms] * 8 [ms] 
 
-
     num_mel_bins = 40
     sampling_rate = rate*1000
     lower_frequency = 20 #Hz
     upper_frequency = 4000 #Hz
     mel_coefs = 10 
-
     
-    print('|--- MFCC_slow...')
-    start_time = time.time()
-    times_MFCC_slow, mfccs_MFCC_slow = MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, mel_coefs)
-    end_time = time.time()
-    tags = ['reading', 'sftf', 'mel', 'mfccs']
-    print("|   |--- Average execution time: ", np.mean(times_MFCC_slow, axis=0)[0]*1000, ' ms')
-    print("|   |      |--- tags: ", tags)
-    print("|   |      |--- ms: ", np.mean(times_MFCC_slow, axis=0)[1:]*1000)
-    print("|   |      |--- %: ", np.mean(times_MFCC_slow, axis=0)[1:]*100/np.mean(times_MFCC_slow, axis=0)[0])
-    print("|   |--- Total execution time: ", (end_time-start_time)/60.0, ' min')
-    print("|   |      |--- Effective min: ",  np.sum(times_MFCC_slow, axis=0)[0]/60.0)
-    print("|   |      |--- Effective %: ", np.sum(times_MFCC_slow, axis=0)[0]*100/(end_time-start_time))
-    print("|   |--- Executed files: ", len(times_MFCC_slow))
-    print("|")
+    time_results_slow, mfccs_MFCC_slow = MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, mel_coefs)
+    
+    print(f'MFCC slow = {np.mean(time_results_slow)*1000:.2f} ms')
 
+    # MFCC fast parameters
+    factor = 2 # new_sf = old_sf/factor
+    num_mel_bins = 32
 
-    factor = 2
-    # num_mel_bins = 20
+    time_results_fast, mfccs_MFCC_fast = MFCC_fast(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, mel_coefs, factor)
+    
+    print(f'MFCC fast = {np.mean(time_results_fast)*1000:.2f} ms')
 
-    for num_mel_bins in [19,20,21,22,23,24,25,26]:
-        print(f'|--- MFCC_fast(factor={factor}, num_mel_bins={num_mel_bins})...')
-        start_time = time.time()
-        times_MFCC_fast, mfccs_MFCC_fast = MFCC_fast(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, lower_frequency, upper_frequency, mel_coefs, factor)
-        end_time = time.time()
-        tags = ['reading', 'sftf', 'mel', 'mfccs']
-        print("|   |--- Average execution time: ", np.mean(times_MFCC_fast, axis=0)[0]*1000, ' ms')
-        print("|   |      |--- tags: ", tags)
-        print("|   |      |--- ms: ", np.mean(times_MFCC_fast, axis=0)[1:]*1000)
-        print("|   |      |--- %: ", np.mean(times_MFCC_fast, axis=0)[1:]*100/np.mean(times_MFCC_fast, axis=0)[0])
-        print("|   |--- Total execution time: ", (end_time-start_time)/60.0, ' min')
-        print("|   |      |--- Effective min: ",  np.sum(times_MFCC_fast, axis=0)[0]/60.0)
-        print("|   |      |--- Effective %: ", np.sum(times_MFCC_fast, axis=0)[0]*100/(end_time-start_time))
-        print("|   |--- Executed files: ", len(times_MFCC_fast))
-        print("|")
-
-        print(f'|--- SNR...')
-        mean_SNR = getSNR(mfccs_MFCC_slow, mfccs_MFCC_fast)
-        print("|   |--- dB: ", mean_SNR)
-        print("=======================================================")
+    mean_SNR = getSNR(mfccs_MFCC_slow, mfccs_MFCC_fast)
+    print(f'SNR = {mean_SNR:.2f} dB')

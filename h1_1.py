@@ -30,7 +30,7 @@ MIN_HUM = 20
 MAX_HUM = 90
 
 def convertFile():
-    with tf.io.TFRecordWriter(args.output) as writer:
+    with tf.io.TFRecordWriter(args.output, 'GZIP') as writer:
         with open(args.input, 'r') as f:
 
             data_line = f.readline()
@@ -43,17 +43,25 @@ def convertFile():
                 timeobj = time.mktime(datetimeobj.timetuple())
 
                 if args.normalize:
-                    temp = (float(data_line[2]) - MIN_TEMP)/ (MAX_TEMP - MIN_TEMP)
-                    hum = (float(data_line[3]) - MIN_HUM)/(MAX_HUM - MIN_HUM)
-                else:
-                    temp = float(data_line[2])
-                    hum = float(data_line[3])
+                  temp = (float(data_line[2]) - MIN_TEMP)/ (MAX_TEMP - MIN_TEMP)
+                  hum = (float(data_line[3]) - MIN_HUM)/(MAX_HUM - MIN_HUM)
 
-                mapping = { 
-                        'datetime': _float_feature(float(timeobj)), 
-                        'temperature': _float_feature(temp), 
-                        'humidity': _float_feature(hum)
+                  mapping = { 
+                        'D': _float_feature(float(timeobj)), 
+                        'T': _float_feature(temp), 
+                        'H': _float_feature(hum)
                     }
+
+                else:
+                  temp = int(data_line[2])
+                  hum = int(data_line[3])
+
+                  mapping = { 
+                        'D': _float_feature(float(timeobj)), 
+                        'T': _int64_feature(temp), 
+                        'H': _int64_feature(hum)
+                  }
+                
                 example = tf.train.Example(features=tf.train.Features(feature=mapping))
                 writer.write(example.SerializeToString())
                 data_line = f.readline()
