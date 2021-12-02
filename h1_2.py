@@ -14,6 +14,9 @@ def MFCC_slow(file_path, frame_length, frame_step, num_mel_bins, sampling_rate, 
     mfccs_results = []
     
     for i, filename in enumerate(os.listdir(file_path)):
+        print('filename: ',filename)
+        print('path: ', file_path)
+        print('--------------------------------------------')
         if not os.path.isdir(filename):
             start_time = time.time()
 
