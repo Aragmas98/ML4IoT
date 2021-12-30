@@ -1,0 +1,466 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+Try the new cross-platform PowerShell https://aka.ms/pscore6
+
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2> python .\part2\final.py --version a
+2022-01-05 08:50:51.947654: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 08:50:51.950084: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Downloading data from http://storage.googleapis.com/download.tensorflow.org/data/mini_speech_commands.zip
+182083584/182082353 [==============================] - 21s 0us/step
+Traceback (most recent call last):
+  File ".\part2\final.py", line 33, in readFile
+FileNotFoundError: [Errno 2] No such file or directory: './splitFiles/kws_train_split.txt'
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2> python .\part2\final.py --version a
+2022-01-05 08:53:26.818126: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 08:53:26.818544: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+Traceback (most recent call last):
+  File ".\part2\final.py", line 41, in <module>
+    train_files= tf.random.shuffle(readFile('.\splitFiles\kws_train_split.txt'))
+  File ".\part2\final.py", line 33, in readFile
+    fp = open(file,'r')
+FileNotFoundError: [Errno 2] No such file or directory: '.\\splitFiles\\kws_train_split.txt'
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2> cd .\part2\
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2\part2> python .\part2\final.py --version a
+C:\Users\juanm\AppData\Local\Programs\Python\Python37\python.exe: can't open file '.\part2\final.py': [Errno 2] No such file or directory
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2\part2> python final.py --version a        
+2022-01-05 08:55:05.444092: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 08:55:05.444533: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-05 08:55:39.751661: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2022-01-05 08:55:40.697806: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 08:55:40.703825: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 08:55:40.708765: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 08:55:41.179212: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 08:55:41.251064: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 08:55:41.253587: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 08:55:41.255887: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 08:55:41.258353: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 08:55:41.258719: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 08:55:41.261604: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)llowing CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-01-05 08:55:41.292370: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1b0eaf76360 initialized for platform Host (this does not guarantee that Xed). Devices:
+2022-01-05 08:55:41.293292: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-01-05 08:55:41.295902: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 08:55:41.296530: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]
+Epoch 1/40
+200/200 [==============================] - 28s 141ms/step - loss: 1.7703 - sparse_categorical_accuracy: 0.3602 - val_loss: 1.4843 - val_sparse_categorical_accuracy: 
+Epoch 2/40
+200/200 [==============================] - 26s 129ms/step - loss: 1.3406 - sparse_categorical_accuracy: 0.5795 - val_loss: 1.1323 - val_sparse_categorical_accuracy: 
+Epoch 3/40
+200/200 [==============================] - 23s 113ms/step - loss: 1.0563 - sparse_categorical_accuracy: 0.6775 - val_loss: 0.8582 - val_sparse_categorical_accuracy: 
+Epoch 4/40
+200/200 [==============================] - 22s 109ms/step - loss: 0.8890 - sparse_categorical_accuracy: 0.7280 - val_loss: 0.7337 - val_sparse_categorical_accuracy: 
+Epoch 5/40
+200/200 [==============================] - 25s 127ms/step - loss: 0.7746 - sparse_categorical_accuracy: 0.7614 - val_loss: 0.6322 - val_sparse_categorical_accuracy: 
+Epoch 6/40
+200/200 [==============================] - 25s 124ms/step - loss: 0.6796 - sparse_categorical_accuracy: 0.7933 - val_loss: 0.5510 - val_sparse_categorical_accuracy: 
+Epoch 7/40
+200/200 [==============================] - 25s 123ms/step - loss: 0.6125 - sparse_categorical_accuracy: 0.8109 - val_loss: 0.4706 - val_sparse_categorical_accuracy: 
+Epoch 8/40
+200/200 [==============================] - 25s 124ms/step - loss: 0.5538 - sparse_categorical_accuracy: 0.8256 - val_loss: 0.4324 - val_sparse_categorical_accuracy: 
+Epoch 9/40
+200/200 [==============================] - 25s 124ms/step - loss: 0.5157 - sparse_categorical_accuracy: 0.8417 - val_loss: 0.4206 - val_sparse_categorical_accuracy: 
+Epoch 10/40
+200/200 [==============================] - 22s 108ms/step - loss: 0.4824 - sparse_categorical_accuracy: 0.8503 - val_loss: 0.4038 - val_sparse_categorical_accuracy: 
+Epoch 11/40
+200/200 [==============================] - 22s 111ms/step - loss: 0.4591 - sparse_categorical_accuracy: 0.8555 - val_loss: 0.3666 - val_sparse_categorical_accuracy: 
+Epoch 12/40
+200/200 [==============================] - 26s 128ms/step - loss: 0.4334 - sparse_categorical_accuracy: 0.8650 - val_loss: 0.3624 - val_sparse_categorical_accuracy: 
+Epoch 13/40
+200/200 [==============================] - 25s 125ms/step - loss: 0.4076 - sparse_categorical_accuracy: 0.8777 - val_loss: 0.3404 - val_sparse_categorical_accuracy: 
+Epoch 14/40
+200/200 [==============================] - 25s 126ms/step - loss: 0.3778 - sparse_categorical_accuracy: 0.8797 - val_loss: 0.3180 - val_sparse_categorical_accuracy: 
+Epoch 15/40
+200/200 [==============================] - 23s 113ms/step - loss: 0.3836 - sparse_categorical_accuracy: 0.8763 - val_loss: 0.3152 - val_sparse_categorical_accuracy: 
+Epoch 16/40
+200/200 [==============================] - 21s 104ms/step - loss: 0.3562 - sparse_categorical_accuracy: 0.8841 - val_loss: 0.2618 - val_sparse_categorical_accuracy: 
+Epoch 17/40
+200/200 [==============================] - 24s 119ms/step - loss: 0.3463 - sparse_categorical_accuracy: 0.8863 - val_loss: 0.2584 - val_sparse_categorical_accuracy: 
+Epoch 18/40
+200/200 [==============================] - 22s 109ms/step - loss: 0.3478 - sparse_categorical_accuracy: 0.8834 - val_loss: 0.2569 - val_sparse_categorical_accuracy: 
+Epoch 19/40
+200/200 [==============================] - 22s 109ms/step - loss: 0.3307 - sparse_categorical_accuracy: 0.8927 - val_loss: 0.2613 - val_sparse_categorical_accuracy: 
+Epoch 20/40
+200/200 [==============================] - 25s 126ms/step - loss: 0.3180 - sparse_categorical_accuracy: 0.8997 - val_loss: 0.2409 - val_sparse_categorical_accuracy: 
+Epoch 21/40
+200/200 [==============================] - 21s 107ms/step - loss: 0.3106 - sparse_categorical_accuracy: 0.9033 - val_loss: 0.2712 - val_sparse_categorical_accuracy: 
+Epoch 22/40
+200/200 [==============================] - 21s 105ms/step - loss: 0.3057 - sparse_categorical_accuracy: 0.8994 - val_loss: 0.2607 - val_sparse_categorical_accuracy: 
+Epoch 23/40
+200/200 [==============================] - 22s 110ms/step - loss: 0.2935 - sparse_categorical_accuracy: 0.9023 - val_loss: 0.2308 - val_sparse_categorical_accuracy: 
+Epoch 24/40
+200/200 [==============================] - 26s 128ms/step - loss: 0.2982 - sparse_categorical_accuracy: 0.9044 - val_loss: 0.2255 - val_sparse_categorical_accuracy: 
+Epoch 25/40
+200/200 [==============================] - 25s 124ms/step - loss: 0.2899 - sparse_categorical_accuracy: 0.9072 - val_loss: 0.2650 - val_sparse_categorical_accuracy: 
+Epoch 26/40
+200/200 [==============================] - 22s 108ms/step - loss: 0.2780 - sparse_categorical_accuracy: 0.9100 - val_loss: 0.2351 - val_sparse_categorical_accuracy: 
+Epoch 27/40
+200/200 [==============================] - 25s 123ms/step - loss: 0.2847 - sparse_categorical_accuracy: 0.9069 - val_loss: 0.2338 - val_sparse_categorical_accuracy: 
+Epoch 28/40
+200/200 [==============================] - 24s 122ms/step - loss: 0.2724 - sparse_categorical_accuracy: 0.9083 - val_loss: 0.2378 - val_sparse_categorical_accuracy: 
+Epoch 29/40
+200/200 [==============================] - 22s 108ms/step - loss: 0.2737 - sparse_categorical_accuracy: 0.9103 - val_loss: 0.2364 - val_sparse_categorical_accuracy: 
+Epoch 30/40
+200/200 [==============================] - 25s 123ms/step - loss: 0.2644 - sparse_categorical_accuracy: 0.9145 - val_loss: 0.2296 - val_sparse_categorical_accuracy: 
+Epoch 31/40
+200/200 [==============================] - 20s 99ms/step - loss: 0.2608 - sparse_categorical_accuracy: 0.9144 - val_loss: 0.2620 - val_sparse_categorical_accuracy: 0
+Epoch 32/40
+200/200 [==============================] - 19s 95ms/step - loss: 0.2489 - sparse_categorical_accuracy: 0.9164 - val_loss: 0.2531 - val_sparse_categorical_accuracy: 0
+Epoch 33/40
+200/200 [==============================] - 19s 96ms/step - loss: 0.2584 - sparse_categorical_accuracy: 0.9159 - val_loss: 0.2458 - val_sparse_categorical_accuracy: 0
+Epoch 34/40
+200/200 [==============================] - 20s 102ms/step - loss: 0.2485 - sparse_categorical_accuracy: 0.9178 - val_loss: 0.2358 - val_sparse_categorical_accuracy: 
+Epoch 35/40
+200/200 [==============================] - 19s 95ms/step - loss: 0.2420 - sparse_categorical_accuracy: 0.9184 - val_loss: 0.2048 - val_sparse_categorical_accuracy: 0
+Epoch 36/40
+200/200 [==============================] - 19s 94ms/step - loss: 0.2399 - sparse_categorical_accuracy: 0.9153 - val_loss: 0.2420 - val_sparse_categorical_accuracy: 0
+Epoch 37/40
+200/200 [==============================] - 19s 94ms/step - loss: 0.2385 - sparse_categorical_accuracy: 0.9209 - val_loss: 0.2299 - val_sparse_categorical_accuracy: 0
+Epoch 38/40
+200/200 [==============================] - 19s 96ms/step - loss: 0.2343 - sparse_categorical_accuracy: 0.9234 - val_loss: 0.2280 - val_sparse_categorical_accuracy: 0
+Epoch 39/40
+200/200 [==============================] - 22s 109ms/step - loss: 0.2390 - sparse_categorical_accuracy: 0.9191 - val_loss: 0.1951 - val_sparse_categorical_accuracy: 
+Epoch 40/40
+200/200 [==============================] - 24s 118ms/step - loss: 0.2275 - sparse_categorical_accuracy: 0.9239 - val_loss: 0.2156 - val_sparse_categorical_accuracy: 
+WARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Model.state_updasorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:11:07.377010: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoidinWARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Layer.updates (fw.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:11:09.677966: I tensorflow/core/grappler/devices.cc:69] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+2022-01-05 09:11:09.678561: I tensorflow/core/grappler/clusters/single_machine.cc:356] Starting new session
+2022-01-05 09:11:09.684613: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:11:09.687263: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:11:09.689630: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:11:09.689852: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:11:09.690082: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:11:09.692431: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 09:11:09.695308: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:11:09.698338: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:11:09.698574: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:11:10.042928: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:11:10.043643: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2022-01-05 09:11:10.044472: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2022-01-05 09:11:10.050580: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x1b0f2267440 initialized for platform CUDA (this does not guarantee that Xed). Devices:
+2022-01-05 09:11:10.051661: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1050, Compute Capability 6.1
+2022-01-05 09:11:10.060437: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:816] Optimization results for grappler item: graph_to_optimize
+2022-01-05 09:11:10.061145: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0.003ms.
+2022-01-05 09:11:10.061731: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0.001ms.
+2022-01-05 09:11:10.218358: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:313] Ignored output_format.
+2022-01-05 09:11:10.218980: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:316] Ignored drop_control_dependency.
+2022-01-05 09:11:10.277557: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:11:10.283278: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:11:10.287843: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:11:10.288398: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:11:10.288749: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+nd
+2022-01-05 09:11:10.296082: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:11:10.299579: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:11:10.299979: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:11:10.300837: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:11:10.301038: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0
+2022-01-05 09:11:10.301221: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+File size: 94.8809 Kilobytes
+Accuracy: 0.922, time: 2.443419098854065 ms
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2\part2> python final.py --version b
+2022-01-05 09:18:28.859737: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:18:28.860143: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-05 09:18:43.570371: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2022-01-05 09:18:44.434220: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:18:44.438529: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:18:44.441823: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:18:44.446457: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:18:44.448499: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:18:44.450916: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 09:18:44.454025: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:18:44.456935: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:18:44.457307: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:18:44.458278: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)llowing CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-01-05 09:18:44.470392: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x20afada4f60 initialized for platform Host (this does not guarantee that Xed). Devices:
+2022-01-05 09:18:44.470934: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-01-05 09:18:44.471244: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:18:44.471450: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]
+Epoch 1/40
+200/200 [==============================] - 25s 123ms/step - loss: 1.7929 - sparse_categorical_accuracy: 0.3489 - val_loss: 1.5272 - val_sparse_categorical_accuracy: 
+Epoch 2/40
+200/200 [==============================] - 21s 106ms/step - loss: 1.4209 - sparse_categorical_accuracy: 0.5427 - val_loss: 1.2484 - val_sparse_categorical_accuracy: 
+Epoch 3/40
+200/200 [==============================] - 23s 117ms/step - loss: 1.1488 - sparse_categorical_accuracy: 0.6392 - val_loss: 0.9149 - val_sparse_categorical_accuracy: 
+Epoch 4/40
+200/200 [==============================] - 23s 116ms/step - loss: 0.9691 - sparse_categorical_accuracy: 0.6953 - val_loss: 0.7761 - val_sparse_categorical_accuracy: 
+Epoch 5/40
+200/200 [==============================] - 23s 114ms/step - loss: 0.8483 - sparse_categorical_accuracy: 0.7308 - val_loss: 0.6731 - val_sparse_categorical_accuracy: 
+Epoch 6/40
+200/200 [==============================] - 23s 116ms/step - loss: 0.7529 - sparse_categorical_accuracy: 0.7617 - val_loss: 0.6132 - val_sparse_categorical_accuracy: 
+Epoch 7/40
+200/200 [==============================] - 23s 115ms/step - loss: 0.6712 - sparse_categorical_accuracy: 0.7870 - val_loss: 0.5137 - val_sparse_categorical_accuracy: 
+Epoch 8/40
+200/200 [==============================] - 24s 119ms/step - loss: 0.6123 - sparse_categorical_accuracy: 0.8094 - val_loss: 0.4777 - val_sparse_categorical_accuracy: 
+Epoch 9/40
+200/200 [==============================] - 27s 133ms/step - loss: 0.5648 - sparse_categorical_accuracy: 0.8227 - val_loss: 0.4560 - val_sparse_categorical_accuracy: 
+Epoch 10/40
+200/200 [==============================] - 26s 132ms/step - loss: 0.5277 - sparse_categorical_accuracy: 0.8414 - val_loss: 0.4213 - val_sparse_categorical_accuracy: 
+Epoch 11/40
+200/200 [==============================] - 24s 119ms/step - loss: 0.5024 - sparse_categorical_accuracy: 0.8433 - val_loss: 0.3625 - val_sparse_categorical_accuracy: 
+Epoch 12/40
+200/200 [==============================] - 24s 120ms/step - loss: 0.4706 - sparse_categorical_accuracy: 0.8531 - val_loss: 0.3976 - val_sparse_categorical_accuracy: 
+Epoch 13/40
+200/200 [==============================] - 20s 102ms/step - loss: 0.4451 - sparse_categorical_accuracy: 0.8608 - val_loss: 0.3851 - val_sparse_categorical_accuracy: 
+Epoch 14/40
+200/200 [==============================] - 20s 102ms/step - loss: 0.4208 - sparse_categorical_accuracy: 0.8644 - val_loss: 0.3371 - val_sparse_categorical_accuracy: 
+Epoch 15/40
+200/200 [==============================] - 24s 118ms/step - loss: 0.4061 - sparse_categorical_accuracy: 0.8681 - val_loss: 0.3232 - val_sparse_categorical_accuracy: 
+Epoch 16/40
+200/200 [==============================] - 23s 115ms/step - loss: 0.3869 - sparse_categorical_accuracy: 0.8728 - val_loss: 0.2963 - val_sparse_categorical_accuracy: 
+Epoch 17/40
+200/200 [==============================] - 23s 115ms/step - loss: 0.3786 - sparse_categorical_accuracy: 0.8761 - val_loss: 0.2693 - val_sparse_categorical_accuracy: 
+Epoch 18/40
+200/200 [==============================] - 24s 118ms/step - loss: 0.3722 - sparse_categorical_accuracy: 0.8802 - val_loss: 0.2688 - val_sparse_categorical_accuracy: 
+Epoch 19/40
+200/200 [==============================] - 35s 173ms/step - loss: 0.3581 - sparse_categorical_accuracy: 0.8875 - val_loss: 0.2852 - val_sparse_categorical_accuracy: 
+Epoch 20/40
+200/200 [==============================] - 31s 156ms/step - loss: 0.3404 - sparse_categorical_accuracy: 0.8903 - val_loss: 0.2680 - val_sparse_categorical_accuracy: 
+Epoch 21/40
+200/200 [==============================] - 32s 158ms/step - loss: 0.3326 - sparse_categorical_accuracy: 0.8919 - val_loss: 0.2557 - val_sparse_categorical_accuracy: 
+Epoch 22/40
+200/200 [==============================] - 34s 172ms/step - loss: 0.3285 - sparse_categorical_accuracy: 0.8909 - val_loss: 0.2626 - val_sparse_categorical_accuracy: 
+Epoch 23/40
+200/200 [==============================] - 36s 180ms/step - loss: 0.3214 - sparse_categorical_accuracy: 0.8905 - val_loss: 0.2441 - val_sparse_categorical_accuracy: 
+Epoch 24/40
+200/200 [==============================] - 36s 180ms/step - loss: 0.3157 - sparse_categorical_accuracy: 0.8980 - val_loss: 0.2312 - val_sparse_categorical_accuracy: 
+Epoch 25/40
+200/200 [==============================] - 36s 180ms/step - loss: 0.3110 - sparse_categorical_accuracy: 0.8966 - val_loss: 0.2521 - val_sparse_categorical_accuracy: 
+Epoch 26/40
+200/200 [==============================] - 34s 171ms/step - loss: 0.3004 - sparse_categorical_accuracy: 0.9031 - val_loss: 0.2395 - val_sparse_categorical_accuracy: 
+Epoch 27/40
+200/200 [==============================] - 30s 150ms/step - loss: 0.3041 - sparse_categorical_accuracy: 0.9002 - val_loss: 0.2430 - val_sparse_categorical_accuracy: 
+Epoch 28/40
+200/200 [==============================] - 89s 445ms/step - loss: 0.2926 - sparse_categorical_accuracy: 0.9050 - val_loss: 0.2219 - val_sparse_categorical_accuracy: 
+Epoch 29/40
+200/200 [==============================] - 92s 459ms/step - loss: 0.2872 - sparse_categorical_accuracy: 0.9077 - val_loss: 0.2502 - val_sparse_categorical_accuracy: 
+Epoch 30/40
+200/200 [==============================] - 21s 104ms/step - loss: 0.2818 - sparse_categorical_accuracy: 0.9041 - val_loss: 0.2166 - val_sparse_categorical_accuracy: 
+Epoch 31/40
+200/200 [==============================] - 20s 101ms/step - loss: 0.2769 - sparse_categorical_accuracy: 0.9089 - val_loss: 0.2520 - val_sparse_categorical_accuracy: 
+Epoch 32/40
+200/200 [==============================] - 19s 95ms/step - loss: 0.2720 - sparse_categorical_accuracy: 0.9080 - val_loss: 0.2247 - val_sparse_categorical_accuracy: 0
+Epoch 33/40
+200/200 [==============================] - 17s 86ms/step - loss: 0.2741 - sparse_categorical_accuracy: 0.9089 - val_loss: 0.2281 - val_sparse_categorical_accuracy: 0
+Epoch 34/40
+200/200 [==============================] - 17s 86ms/step - loss: 0.2804 - sparse_categorical_accuracy: 0.9053 - val_loss: 0.2230 - val_sparse_categorical_accuracy: 0
+Epoch 35/40
+200/200 [==============================] - 18s 89ms/step - loss: 0.2737 - sparse_categorical_accuracy: 0.9067 - val_loss: 0.2070 - val_sparse_categorical_accuracy: 0
+Epoch 36/40
+200/200 [==============================] - 18s 92ms/step - loss: 0.2722 - sparse_categorical_accuracy: 0.9123 - val_loss: 0.2197 - val_sparse_categorical_accuracy: 0
+Epoch 37/40
+200/200 [==============================] - 21s 105ms/step - loss: 0.2615 - sparse_categorical_accuracy: 0.9117 - val_loss: 0.2108 - val_sparse_categorical_accuracy: 
+Epoch 38/40
+200/200 [==============================] - 19s 97ms/step - loss: 0.2470 - sparse_categorical_accuracy: 0.9203 - val_loss: 0.2148 - val_sparse_categorical_accuracy: 0
+Epoch 39/40
+200/200 [==============================] - 17s 85ms/step - loss: 0.2508 - sparse_categorical_accuracy: 0.9177 - val_loss: 0.2127 - val_sparse_categorical_accuracy: 0
+Epoch 40/40
+200/200 [==============================] - 17s 85ms/step - loss: 0.2648 - sparse_categorical_accuracy: 0.9112 - val_loss: 0.2237 - val_sparse_categorical_accuracy: 0
+WARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Model.state_updasorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:37:31.198450: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoidinWARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Layer.updates (fw.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:37:33.578143: I tensorflow/core/grappler/devices.cc:69] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+2022-01-05 09:37:33.582919: I tensorflow/core/grappler/clusters/single_machine.cc:356] Starting new session
+2022-01-05 09:37:33.585402: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:37:33.901222: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:37:33.904721: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:37:33.905011: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:37:33.905241: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:37:33.908159: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 09:37:33.911116: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:37:33.914609: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:37:33.914915: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:37:34.214387: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:37:34.214609: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2022-01-05 09:37:34.214868: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2022-01-05 09:37:34.218549: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x20afb878370 initialized for platform CUDA (this does not guarantee that Xed). Devices:
+2022-01-05 09:37:34.218940: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1050, Compute Capability 6.1
+2022-01-05 09:37:34.230311: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:816] Optimization results for grappler item: graph_to_optimize
+2022-01-05 09:37:34.230558: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0.002ms.
+2022-01-05 09:37:34.230748: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0.001ms.
+2022-01-05 09:37:34.375672: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:313] Ignored output_format.
+2022-01-05 09:37:34.375915: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:316] Ignored drop_control_dependency.
+2022-01-05 09:37:34.420314: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:37:34.424573: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:37:34.426752: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:37:34.426987: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:37:34.427241: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+nd
+2022-01-05 09:37:34.432128: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:37:34.434275: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:37:34.434491: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:37:34.435099: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:37:34.435301: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0
+2022-01-05 09:37:34.435471: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+File size: 47.1904 Kilobytes
+Accuracy: 0.925, time: 68.51540833711624 ms
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2\part2> python final.py --version c
+2022-01-05 09:42:17.997363: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:42:17.997701: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2022-01-05 09:42:39.607260: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library nvcuda.dll
+2022-01-05 09:42:40.471325: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties: 
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:42:40.474711: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:42:40.477659: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:42:40.487242: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:42:40.490785: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:42:40.493559: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 09:42:40.495993: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:42:40.498464: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:42:40.498808: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:42:40.500104: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)llowing CPU instructions in performance-critical operations:  AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-01-05 09:42:40.513506: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x25665f66160 initialized for platform Host (this does not guarantee that Xed). Devices:
+2022-01-05 09:42:40.514001: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+2022-01-05 09:42:40.514414: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:42:40.514731: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]
+Epoch 1/40
+200/200 [==============================] - 19s 97ms/step - loss: 1.9169 - sparse_categorical_accuracy: 0.2789 - val_loss: 1.7253 - val_sparse_categorical_accuracy: 0
+Epoch 2/40
+200/200 [==============================] - 12s 62ms/step - loss: 1.6477 - sparse_categorical_accuracy: 0.4319 - val_loss: 1.5106 - val_sparse_categorical_accuracy: 0
+Epoch 3/40
+200/200 [==============================] - 12s 62ms/step - loss: 1.4530 - sparse_categorical_accuracy: 0.5305 - val_loss: 1.2129 - val_sparse_categorical_accuracy: 0
+Epoch 4/40
+200/200 [==============================] - 13s 65ms/step - loss: 1.2444 - sparse_categorical_accuracy: 0.6059 - val_loss: 1.0566 - val_sparse_categorical_accuracy: 0
+Epoch 5/40
+200/200 [==============================] - 15s 74ms/step - loss: 1.0873 - sparse_categorical_accuracy: 0.6500 - val_loss: 0.8992 - val_sparse_categorical_accuracy: 0
+Epoch 6/40
+200/200 [==============================] - 15s 73ms/step - loss: 0.9669 - sparse_categorical_accuracy: 0.6888 - val_loss: 0.8209 - val_sparse_categorical_accuracy: 0
+Epoch 7/40
+200/200 [==============================] - 14s 68ms/step - loss: 0.8933 - sparse_categorical_accuracy: 0.7198 - val_loss: 0.7340 - val_sparse_categorical_accuracy: 0
+Epoch 8/40
+200/200 [==============================] - 14s 70ms/step - loss: 0.8166 - sparse_categorical_accuracy: 0.7377 - val_loss: 0.6489 - val_sparse_categorical_accuracy: 0
+Epoch 9/40
+200/200 [==============================] - 13s 63ms/step - loss: 0.7722 - sparse_categorical_accuracy: 0.7533 - val_loss: 0.6338 - val_sparse_categorical_accuracy: 0
+Epoch 10/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.7256 - sparse_categorical_accuracy: 0.7645 - val_loss: 0.5818 - val_sparse_categorical_accuracy: 0
+Epoch 11/40
+200/200 [==============================] - 14s 71ms/step - loss: 0.6900 - sparse_categorical_accuracy: 0.7780 - val_loss: 0.5195 - val_sparse_categorical_accuracy: 0
+Epoch 12/40
+200/200 [==============================] - 14s 68ms/step - loss: 0.6517 - sparse_categorical_accuracy: 0.7980 - val_loss: 0.5165 - val_sparse_categorical_accuracy: 0
+Epoch 13/40
+200/200 [==============================] - 12s 62ms/step - loss: 0.6192 - sparse_categorical_accuracy: 0.8002 - val_loss: 0.4738 - val_sparse_categorical_accuracy: 0
+Epoch 14/40
+200/200 [==============================] - 14s 72ms/step - loss: 0.6009 - sparse_categorical_accuracy: 0.7987 - val_loss: 0.4682 - val_sparse_categorical_accuracy: 0
+Epoch 15/40
+200/200 [==============================] - 14s 71ms/step - loss: 0.5718 - sparse_categorical_accuracy: 0.8158 - val_loss: 0.4510 - val_sparse_categorical_accuracy: 0
+Epoch 16/40
+200/200 [==============================] - 13s 67ms/step - loss: 0.5430 - sparse_categorical_accuracy: 0.8300 - val_loss: 0.3833 - val_sparse_categorical_accuracy: 0
+Epoch 17/40
+200/200 [==============================] - 15s 74ms/step - loss: 0.5368 - sparse_categorical_accuracy: 0.8275 - val_loss: 0.3954 - val_sparse_categorical_accuracy: 0
+Epoch 18/40
+200/200 [==============================] - 13s 67ms/step - loss: 0.5189 - sparse_categorical_accuracy: 0.8344 - val_loss: 0.3664 - val_sparse_categorical_accuracy: 0
+Epoch 19/40
+200/200 [==============================] - 14s 69ms/step - loss: 0.4947 - sparse_categorical_accuracy: 0.8458 - val_loss: 0.3980 - val_sparse_categorical_accuracy: 0
+Epoch 20/40
+200/200 [==============================] - 13s 64ms/step - loss: 0.4895 - sparse_categorical_accuracy: 0.8447 - val_loss: 0.3636 - val_sparse_categorical_accuracy: 0
+Epoch 21/40
+200/200 [==============================] - 13s 65ms/step - loss: 0.4787 - sparse_categorical_accuracy: 0.8444 - val_loss: 0.3748 - val_sparse_categorical_accuracy: 0
+Epoch 22/40
+200/200 [==============================] - 14s 72ms/step - loss: 0.4757 - sparse_categorical_accuracy: 0.8453 - val_loss: 0.3524 - val_sparse_categorical_accuracy: 0
+Epoch 23/40
+200/200 [==============================] - 14s 69ms/step - loss: 0.4657 - sparse_categorical_accuracy: 0.8495 - val_loss: 0.3362 - val_sparse_categorical_accuracy: 0
+Epoch 24/40
+200/200 [==============================] - 13s 65ms/step - loss: 0.4598 - sparse_categorical_accuracy: 0.8553 - val_loss: 0.3200 - val_sparse_categorical_accuracy: 0
+Epoch 25/40
+200/200 [==============================] - 14s 70ms/step - loss: 0.4549 - sparse_categorical_accuracy: 0.8534 - val_loss: 0.3500 - val_sparse_categorical_accuracy: 0
+Epoch 26/40
+200/200 [==============================] - 13s 63ms/step - loss: 0.4512 - sparse_categorical_accuracy: 0.8519 - val_loss: 0.3298 - val_sparse_categorical_accuracy: 0
+Epoch 27/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.4435 - sparse_categorical_accuracy: 0.8555 - val_loss: 0.3236 - val_sparse_categorical_accuracy: 0
+Epoch 28/40
+200/200 [==============================] - 12s 62ms/step - loss: 0.4339 - sparse_categorical_accuracy: 0.8564 - val_loss: 0.3251 - val_sparse_categorical_accuracy: 0
+Epoch 29/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.4264 - sparse_categorical_accuracy: 0.8580 - val_loss: 0.3435 - val_sparse_categorical_accuracy: 0
+Epoch 30/40
+200/200 [==============================] - 13s 66ms/step - loss: 0.4261 - sparse_categorical_accuracy: 0.8614 - val_loss: 0.2991 - val_sparse_categorical_accuracy: 0
+Epoch 31/40
+200/200 [==============================] - 15s 73ms/step - loss: 0.4118 - sparse_categorical_accuracy: 0.8636 - val_loss: 0.3884 - val_sparse_categorical_accuracy: 0
+Epoch 32/40
+200/200 [==============================] - 14s 69ms/step - loss: 0.4144 - sparse_categorical_accuracy: 0.8664 - val_loss: 0.3296 - val_sparse_categorical_accuracy: 0
+Epoch 33/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.4064 - sparse_categorical_accuracy: 0.8619 - val_loss: 0.3140 - val_sparse_categorical_accuracy: 0
+Epoch 34/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.4045 - sparse_categorical_accuracy: 0.8644 - val_loss: 0.3118 - val_sparse_categorical_accuracy: 0
+Epoch 35/40
+200/200 [==============================] - 14s 71ms/step - loss: 0.3874 - sparse_categorical_accuracy: 0.8691 - val_loss: 0.2781 - val_sparse_categorical_accuracy: 0
+Epoch 36/40
+200/200 [==============================] - 15s 73ms/step - loss: 0.4009 - sparse_categorical_accuracy: 0.8639 - val_loss: 0.3022 - val_sparse_categorical_accuracy: 0
+Epoch 37/40
+200/200 [==============================] - 13s 66ms/step - loss: 0.3757 - sparse_categorical_accuracy: 0.8767 - val_loss: 0.2917 - val_sparse_categorical_accuracy: 0
+Epoch 38/40
+200/200 [==============================] - 12s 61ms/step - loss: 0.3922 - sparse_categorical_accuracy: 0.8744 - val_loss: 0.2947 - val_sparse_categorical_accuracy: 0
+Epoch 39/40
+200/200 [==============================] - 13s 64ms/step - loss: 0.3891 - sparse_categorical_accuracy: 0.8717 - val_loss: 0.2881 - val_sparse_categorical_accuracy: 0
+Epoch 40/40
+200/200 [==============================] - 13s 64ms/step - loss: 0.3764 - sparse_categorical_accuracy: 0.8744 - val_loss: 0.2711 - val_sparse_categorical_accuracy: 0
+WARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Model.state_updasorflow.python.keras.engine.training) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:51:53.260677: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoidinWARNING:tensorflow:From C:\Users\juanm\AppData\Local\Programs\Python\Python37\lib\site-packages\tensorflow\python\training\tracking\tracking.py:111: Layer.updates (fw.python.keras.engine.base_layer) is deprecated and will be removed in a future version.
+Instructions for updating:
+This property should not be used in TensorFlow 2.0, as updates are applied automatically.
+2022-01-05 09:51:55.524581: I tensorflow/core/grappler/devices.cc:69] Number of eligible GPUs (core count >= 8, compute capability >= 0.0): 0
+2022-01-05 09:51:55.524979: I tensorflow/core/grappler/clusters/single_machine.cc:356] Starting new session
+2022-01-05 09:51:55.526441: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:51:55.530312: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:51:55.532953: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:51:55.533197: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:51:55.533384: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:51:55.536097: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_1nd
+2022-01-05 09:51:55.538405: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_1nd
+2022-01-05 09:51:55.540703: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll no
+2022-01-05 09:51:55.541105: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mention
+installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for .
+Skipping registering GPU devices...
+2022-01-05 09:51:55.770938: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:51:55.771211: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0 
+2022-01-05 09:51:55.771408: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+2022-01-05 09:51:55.772721: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x25666aa1b90 initialized for platform CUDA (this does not guarantee that Xed). Devices:
+2022-01-05 09:51:55.773087: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): GeForce GTX 1050, Compute Capability 6.1
+2022-01-05 09:51:55.775827: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:816] Optimization results for grappler item: graph_to_optimize
+2022-01-05 09:51:55.776128: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0.002ms.
+2022-01-05 09:51:55.776314: I tensorflow/core/grappler/optimizers/meta_optimizer.cc:818]   function_optimizer: function_optimizer did nothing. time = 0ms.
+2022-01-05 09:51:55.866937: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:313] Ignored output_format.
+2022-01-05 09:51:55.867304: W tensorflow/compiler/mlir/lite/python/tf_tfl_flatbuffer_helpers.cc:316] Ignored drop_control_dependency.
+2022-01-05 09:51:55.872601: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1716] Found device 0 with properties:
+pciBusID: 0000:01:00.0 name: GeForce GTX 1050 computeCapability: 6.1
+coreClock: 1.493GHz coreCount: 5 deviceMemorySize: 4.00GiB deviceMemoryBandwidth: 104.43GiB/s
+2022-01-05 09:51:55.875499: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudart64_101.dll'; dlerror: cudart64_101.2022-01-05 09:51:55.878251: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cublas64_10.dll'; dlerror: cublas64_10.dl
+2022-01-05 09:51:55.878555: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library cufft64_10.dll
+2022-01-05 09:51:55.878810: I tensorflow/stream_executor/platform/default/dso_loader.cc:48] Successfully opened dynamic library curand64_10.dll
+2022-01-05 09:51:55.881622: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusolver64_10.dll'; dlerror: cusolver64_10.dll not found
+2022-01-05 09:51:55.884777: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cusparse64_10.dll'; dlerror: cusparse64_10.dll not found
+2022-01-05 09:51:55.887919: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'cudnn64_7.dll'; dlerror: cudnn64_7.dll not found
+2022-01-05 09:51:55.888260: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1753] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
+Skipping registering GPU devices...
+2022-01-05 09:51:55.889015: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1257] Device interconnect StreamExecutor with strength 1 edge matrix:
+2022-01-05 09:51:55.889256: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1263]      0
+2022-01-05 09:51:55.889422: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1276] 0:   N
+File size: 23.3018 Kilobytes
+Accuracy: 0.912, time: 32.21677839756012 ms
+PS D:\POLITECNICO DI TORINO\2.1\01TXPSM _Machine learning for IOT\H2\part2>

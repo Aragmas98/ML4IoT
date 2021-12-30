@@ -1,0 +1,56 @@
+
+   modelA	92%	130KB
+-------------------------------------------------------------
+no optimization:
+mlp_a50		76	 352 	* mlp is overfitted a lot.
+cnn_a100	94	1081	* cnn has noticeable overfitting
+cnn_a50		90	 273
+dscnn_a100	93	 512
+dscnn_a50	92	 138
+dscnn_a50	91	 138	* frame length 480 (drop in accuracy)
+dscnn_a45	92*	 113	* in reality was 91.8
+dscnn_a48	91	 126 	 (65ms)
+dscnn_a48	88	 126	* using stft (not mfcc).
+dscnn_a47	90	 122
+dscnn_a20	88	  28
+dscnn_a48	91	 127	* using Bias, overfit increased
+dscnn_a48	91	 133	* using inner kernel=[5,5], overfitt
+dscnx_a80	86	 172	* 40 epochs, removing inner block
+dscny_a20	90	 39	* duplicating inner block, overfit litt.
+dscny_a28	92	 70 	* duplicating inner block, overfit (62ms)
+dscny_a40	92	 132	* duplicating inner block, overfit huge
+
+dscnz_a25	93	  71<<<	* triplicating inner block ([2,2]) (dropout at each inner) (62ms).
+
+
+
+
+magnitude_pruning:
+dscnn_a28_s90	88	 25
+dscnn_a50_s90	91	 70
+dscnn_a70_s90	90	130
+dscnn_a70_s50	91	 91
+cnn_a25_s90	91	393
+
+dscnz_a25	93	  37 <<	* triplicating inner block ([2,2]) (dropout at each inner) (64ms).
+
+
+   modelB	91.5%	 50KB	  ---	 40ms
+-------------------------------------------------------------
+
+B1		90.9	36		37.09
+Bfinal		92.5	47		40.39
+
+   modelC	91%	 25KB	  ---	 40ms
+-------------------------------------------------------------
+no magnitude pruning:
+dscnn_a70	92	130
+dscnn_a80	92	166
+dscnn_a30	90	 28	64.0
+
+	
+dscnn_a20	88	26	38.9	(256,128) representative. C1
+dscnn_a15	91.2	23.3	39.42	(256,128) representative. Cfinal 
+
+
+
