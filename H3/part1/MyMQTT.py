@@ -36,15 +36,15 @@ class MyMQTT:
         print ("subscribing to %s" % (topic))
         # subscribe for a topic
         self._paho_mqtt.subscribe(topic, 2)
-
         # just to remember that it works also as a subscriber
         self._isSubscriber = True
         self._topic = topic
 
     def start(self):
         #manage connection to broker
-        # self._paho_mqtt.connect(self.broker , self.port)
-        self._paho_mqtt.connect_async(self.broker , self.port)  # <<<<<<< 
+        
+        self._paho_mqtt.connect(self.broker , self.port)
+        
         self._paho_mqtt.loop_start()
 
     def stop (self):

@@ -1,4 +1,3 @@
-from ast import arg
 import base64 
 import requests
 import json
@@ -11,15 +10,21 @@ import time
 
 class Subscriber(DoSomething):
     def notify(self, topic, msg):
-        print('hello world')
+        
+        msg_json = json.loads(msg)
+        timestamp = int(msg_json['bt'])
+        time_str = datetime.fromtimestamp(timestamp).isoformat()
+        for e in msg_json['e']:
+            print(f"{time_str} {e['n']}: {e['v']}")
+
 
 
 if __name__ == '__main__':
     subscriver = Subscriber('subscriber 1')
     subscriver.run() 
-    subscriver.myMqttClient.mySubscribe('/4jb8hs4/timestamp')
+    subscriver.myMqttClient.mySubscribe('/ML4IoT/Group17/H3/e1/alert')
     
-    url = f"http://localhost:8080/predict?model=model_1.tf"
+    url = "http://localhost:8080/predict?model=model_1.tf&tthres=0.1&hthres=0.1"
 
     r = requests.get(url)
     print(r.status_code)

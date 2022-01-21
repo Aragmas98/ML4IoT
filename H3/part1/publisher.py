@@ -18,4 +18,4 @@ if __name__ == '__main__':
         # SEND INFO THROUGH MQTT
         publisher.myMqttClient.myPublish('/4jb8hs4/timestamp', timestamp_json)
 
-        time.sleep(5)
+        time.sleep(15)

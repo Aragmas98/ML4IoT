@@ -6,27 +6,10 @@ import tensorflow as tf
 import numpy as np
 from DoSomething import DoSomething 
 from datetime import datetime 
+import time
 
-data = [[14.1 , 95.8 ],
-            [13.97, 96.1 ],
-            [13.75, 96.3 ],
-            [13.7 , 96.8 ],
-            [13.83, 97.2 ],
-            [13.82, 97.4 ],
-            [13.73, 97.8 ],
-            [13.68, 98.  ],
-            [13.55, 98.3 ],
-            [13.53, 98.5 ],
-            [13.53, 98.6 ],
-            [13.5 , 98.7 ],
-            [13.46, 98.8 ],
-            [13.46, 98.8 ],
-            [13.43, 98.9 ],
-            [13.45, 98.9 ],
-            [13.33, 98.9 ],
-            [13.26, 99.  ],
-            [13.28, 99.1 ],
-            [13.25, 99.1 ]]
+from board import D4 
+import adafruit_dht 
 
 class RegistryService(object):
 
@@ -50,44 +33,106 @@ class RegistryService(object):
             model_name = str(query.get('model'))
             print(model_name)
             if model_name is None:
-                raise cherrypy.HTTPError(400, 'WRONG QUERY - MODEL')
+                raise cherrypy.HTTPError(400, 'WRONG QUERY - model')
+            
+            tthres = float(query.get('tthres'))
+            print(tthres, type(tthres))
+            if tthres is None:
+                raise cherrypy.HTTPError(400, 'WRONG QUERY - tthres')
+            
+            hthres = float(query.get('hthres'))
+            print(hthres, type(hthres))
+            if hthres is None:
+                raise cherrypy.HTTPError(400, 'WRONG QUERY - hthres')
+
+            print('model read correctly')
+
+            dht_device = adafruit_dht.DHT11(D4)
+
+            print('dht device created')
 
             model_path = f"./models/{model_name}"
-
+            
             tensor_specs = (tf.TensorSpec([None, 6, 2], dtype=tf.float32), tf.TensorSpec([None, 1, 2]))
             interpreter = tf.lite.Interpreter(model_path=model_path)
             input_details = interpreter.get_input_details()
             output_details = interpreter.get_output_details()
             interpreter.allocate_tensors()
 
+            print('interpreter allocated')
+
+
             mean = np.array([ 9.107597, 75.904076])
             std = np.array([ 8.654227, 16.557089])
 
-            x = data[:6]
-            y_true = data[6]
+            data = []
 
-            x = (x - mean) / (std + 1.e-6)
-            x = tf.convert_to_tensor(x, dtype=tf.float32)
-            x = tf.expand_dims(x, 0)
+            for i in range(1,20):
+                
+                temperature = dht_device.temperature 
+                humidity = dht_device.humidity
+
+                if i%7 != 0:
+                    #read a value and append
+                    data.append([temperature, humidity])
+                    print('value added')
+                    
+                else:
+                    #do prediction and restart.
+                    print('prediction started')
+                    x = np.array(data)
+                    y_true = np.array([temperature, humidity])
+
+                    x = (x - mean) / (std + 1.e-6)
+                    x = tf.convert_to_tensor(x, dtype=tf.float32)
+                    x = tf.expand_dims(x, 0)
+
+                    print('data prepared')
+                    interpreter.set_tensor(input_details[0]['index'], x)
+                    interpreter.invoke()
+                    y_pred = interpreter.get_tensor(output_details[0]['index'])
+                    print('prediction done')
+                    mae = np.mean(np.abs(y_pred - y_true), axis=1)
+                    
+                    data = []
+                    
+                    print(mae, mae.shape)
+                    print(y_pred, y_pred.shape)
+                    
+                    if mae[0][0] > tthres:
+                        print('publishing tthres...')
+                        now = datetime.now()
+                        timestamp = int(now.timestamp())
+                        body = {
+                            "bn":"raspberrypi.local",
+                            "bt": timestamp, 
+                            "e": [
+                                {"n":"Temperature", "u":"Cel", "t":0, "v":float(y_true[0])},
+                                {"n":"Prediction", "u":"Cel", "t":0, "v":float(y_pred[0][0][0])},
+                            ]
+                        }
+                        body = json.dumps(body)
+                        publisher.myMqttClient.myPublish('/ML4IoT/Group17/H3/e1/alert', body)
+                        
+
+                    if mae[0][1] > hthres:
+                        print('publishing hthres...')
+                        now = datetime.now()
+                        timestamp = int(now.timestamp())
+                        body = {
+                            "bn":"raspberrypi.local",
+                            "bt": timestamp, 
+                            "e": [
+                                {"n":"Humidity", "u":"%", "t":0, "v":float(y_true[1])},
+                                {"n":"Prediction", "u":"%", "t":0, "v":float(y_pred[0][0][1])},
+                            ]
+                        }
+                        body = json.dumps(body)
+                        publisher.myMqttClient.myPublish('/ML4IoT/Group17/H3/e1/alert', body)
+
+                time.sleep(1)
+
             
-            interpreter.set_tensor(input_details[0]['index'], x)
-            interpreter.invoke()
-            y_pred = interpreter.get_tensor(output_details[0]['index'])
-
-            mae = np.mean(np.abs(y_pred - y_true), axis=1)
-            
-            now = datetime.now()
-            timestamp = str((now.timestamp()))
-            # PACK INFO INTO A JSON
-            timestamp_json = json.dumps({'timestamp':timestamp})
-            # SEND INFO THROUGH MQTT
-            print('publishing...')
-            publisher.myMqttClient.myPublish('/4jb8hs4/timestamp', timestamp_json)
-            
-
-            
-
-
     def POST(self, *path, **query):
         pass
 
